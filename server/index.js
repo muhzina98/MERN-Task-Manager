@@ -10,17 +10,25 @@ connectDatabase();
 const app = express();
 
 
-app.use(cors(
-{
-  origin: "http://localhost:5173",
+app.use(cors({
+  origin: process.env.CLIENT_URL || "*",
   credentials: true
 }));
+
 app.use(express.json());
 
 
 app.get("/", (req, res) => res.send("API is running"));
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  });
+}
 
 app.use(globalErrorHandler);
 
