@@ -5,9 +5,13 @@ import authRoutes from "./route/authRoutes.js"
 import taskRoutes from "./route/taskRoutes.js";
 import {  globalErrorHandler } from "./middleware/errorMiddleware.js";
 import connectDatabase from './config/connectDatabase.js'
+import path from "path"; 
+
 dotenv.config();
 connectDatabase();
 const app = express();
+const __dirname = path.resolve();
+
 
 
 app.use(cors({

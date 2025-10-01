@@ -4,9 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "server": "nodemon server/index.js",
-    "client": "npm run --prefix client dev",
-    "build": "npm run --prefix client build",
+    
+  "build": "cd client && npm install && npm run build",
     "start": "node server/index.js"
   },
   "dependencies": {
